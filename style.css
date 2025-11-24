@@ -269,7 +269,7 @@ body {
     font-family: var(--font-heading);
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 900;
-    background: linear-gradient(135deg, var(--vert-stephanois), var(--vert-clair));
+    background: linear-gradient(135deg, var(--text-primary), var(--text-primary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
