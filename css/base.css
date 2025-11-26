@@ -1,0 +1,157 @@
+/* ===== RESET & BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Couleurs stéphanoises (vert ASSE) */
+    --vert-stephanois: #00a650;
+    --vert-clair: #00ff88;
+    --vert-fonce: #006633;
+    --desert-sand: #f4a460;
+    --desert-orange: #ff8c42;
+
+    /* Couleurs modernes */
+    --dark-bg: #0a0f1a;
+    --dark-card: #1a1f35;
+    --dark-lighter: #252b45;
+    --text-primary: #ffffff;
+    --text-secondary: #a0aec0;
+
+    /* Typographie */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.container-fluid {
+    width: 100%;
+    padding: 0 20px;
+}
+
+.container-full {
+    width: 100%;
+    padding: 0;
+}
+
+/* ===== SECTIONS COMMUNES ===== */
+.section {
+    padding: 60px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(0, 166, 80, 0.1);
+    color: var(--vert-stephanois);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--vert-stephanois), var(--vert-clair));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ===== BOUTONS ===== */
+.cta-button {
+    display: inline-block;
+    padding: 16px 40px;
+    background: linear-gradient(135deg, var(--vert-stephanois), var(--vert-fonce));
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 166, 80, 0.3);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 166, 80, 0.4);
+}
+
+.cta-button.secondary {
+    background: transparent;
+    border: 2px solid var(--vert-stephanois);
+    color: var(--vert-stephanois);
+}
+
+.cta-button.secondary:hover {
+    background: var(--vert-stephanois);
+    color: white;
+}
+
+/* ===== FORMULAIRES ===== */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--dark-lighter);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    border-radius: 10px;
+    color: white;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--vert-stephanois);
+    box-shadow: 0 0 0 3px rgba(0, 166, 80, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}

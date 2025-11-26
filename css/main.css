@@ -1,0 +1,20 @@
+/**
+ * Fichier CSS Principal - Les Verts au Désert
+ * 4L Trophy 2027
+ *
+ * Ce fichier importe tous les styles du site organisés par section
+ */
+
+/* Base - Variables, Reset, Styles Communs */
+@import url('base.css');
+
+/* Sections du site */
+@import url('sections/navigation.css');
+@import url('sections/hero.css');
+@import url('sections/projet.css');
+@import url('sections/itineraire.css');
+@import url('sections/equipe.css');
+@import url('sections/model-3d.css');
+@import url('sections/budget.css');
+@import url('sections/contact.css');
+@import url('sections/footer.css');
