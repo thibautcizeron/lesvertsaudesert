@@ -5,7 +5,7 @@ const destinations = [
         name: "Départ : Saint-Étienne",
         lat: 45.4397,
         lng: 4.3872,
-        date: "17.02.2027",
+        date: "16.02.2027",
         pays: "France",
         description: "Point de départ de notre aventure du 4L Trophy ! Départ de Saint-Étienne pour commencer notre périple vers le Maroc."
     },
@@ -13,7 +13,7 @@ const destinations = [
         name: "Biarritz",
         lat: 43.4832,
         lng: -1.5586,
-        date: "19-20.02.2027",
+        date: "17-20.02.2027",
         pays: "France",
         description: "Étape sur la côte basque française. Dernière ville française avant de traverser l'Espagne."
     },
@@ -21,7 +21,7 @@ const destinations = [
         name: "Algéciras",
         lat: 36.1382,
         lng: -5.4418,
-        date: "21-22.02.2027",
+        date: "19-22.02.2027",
         pays: "Espagne",
         description: "Ville portuaire du sud de l'Espagne. Embarquement pour le ferry vers Tanger, traversée du détroit de Gibraltar."
     },

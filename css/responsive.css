@@ -82,6 +82,20 @@
 
 /* ===== TABLETTES ET PETITS ÉCRANS (max-width: 768px) ===== */
 @media (max-width: 768px) {
+    /* Ajuster l'offset de scroll pour mobile */
+    html {
+        scroll-padding-top: 96px;
+    }
+
+    section[id] {
+        scroll-margin-top: 96px;
+    }
+
+    /* Réduire le padding-top des sections sur mobile */
+    .section {
+        padding: 96px 0 50px 0;
+    }
+
     /* Navigation */
     .nav-container {
         padding: 0 20px;

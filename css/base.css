@@ -27,6 +27,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 101px; /* Navbar + 1px pour cacher complètement la section précédente */
 }
 
 body {
@@ -35,6 +36,11 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+/* Offset pour toutes les sections avec un id (pour les ancres) */
+section[id] {
+    scroll-margin-top: 101px;
 }
 
 .container {
@@ -55,7 +61,7 @@ body {
 
 /* ===== SECTIONS COMMUNES ===== */
 .section {
-    padding: 60px 0;
+    padding: 50px 0 60px 0; /* Plus d'espace en haut pour le scroll offset */
 }
 
 .section-header {
