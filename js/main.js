@@ -11,5 +11,6 @@ import './sections/smooth-scroll.js';
 import './sections/animations.js';
 import './sections/model-3d.js';
 import './sections/map.js';
+import './sections/contact.js';
 
 console.log('Les Verts au Désert - Site chargé avec succès ! 🚗🌵');

@@ -35,3 +35,56 @@
     resize: vertical;
     min-height: 150px;
 }
+
+/* Bouton de soumission */
+#submit-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+#submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.btn-loading {
+    display: none;
+}
+
+/* Messages de statut */
+#form-status {
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-status-success {
+    background: rgba(0, 166, 80, 0.2);
+    color: var(--vert-clair);
+    border: 1px solid var(--vert-stephanois);
+}
+
+.form-status-error {
+    background: rgba(220, 53, 69, 0.2);
+    color: #ff6b6b;
+    border: 1px solid #dc3545;
+}
+
+.form-status-info {
+    background: rgba(0, 123, 255, 0.2);
+    color: #66b3ff;
+    border: 1px solid #007bff;
+}

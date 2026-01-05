@@ -382,17 +382,21 @@
                 <h2 class="section-title">Envoyez-nous un message</h2>
                 <p style="max-width: 600px; margin: 1rem auto; color: var(--text-secondary);">Une question ? Une proposition de partenariat ? N'hésitez pas à nous contacter !</p>
             </div>
-            <form class="contact-form-centered">
+            <form class="contact-form-centered" id="contact-form" action="https://formspree.io/f/xdakvdng" method="POST">
                 <div class="form-group">
-                    <input type="text" placeholder="Votre nom" required>
+                    <input type="text" name="name" id="name" placeholder="Votre nom" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" placeholder="Votre email" required>
+                    <input type="email" name="email" id="email" placeholder="Votre email" required>
                 </div>
                 <div class="form-group">
-                    <textarea placeholder="Votre message" rows="5" required></textarea>
+                    <textarea name="message" id="message" placeholder="Votre message" rows="5" required></textarea>
                 </div>
-                <button type="submit" class="cta-button">Envoyer</button>
+                <button type="submit" class="cta-button" id="submit-btn">
+                    <span class="btn-text">Envoyer</span>
+                    <span class="btn-loading" style="display: none;">Envoi en cours...</span>
+                </button>
+                <div id="form-status" style="margin-top: 20px; text-align: center; display: none;"></div>
             </form>
         </div>
     </section>
@@ -430,7 +434,7 @@
                     <ul>
                         <li>
                             <span class="footer-icon">📧</span>
-                            <a href="mailto:lesvertsaudesert@gmail.com">lesvertsaudesert@gmail.com</a>
+                            <a href="mailto:thibaut.cizeron2002@gmail.com">lesvertsaudesert@gmail.com</a>
                         </li>
                         <li>
                             <span class="footer-icon">📱</span>
