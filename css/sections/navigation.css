@@ -215,7 +215,7 @@
 }
 
 /* Responsive Navigation */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .hamburger {
         display: flex;
     }
@@ -223,18 +223,27 @@
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 85px;
         flex-direction: column;
         background: rgba(10, 15, 26, 0.98);
         width: 100%;
         text-align: center;
-        transition: 0.3s;
+        transition: left 0.3s ease;
         padding: 40px 0;
         gap: 20px;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(0, 166, 80, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        max-height: calc(100vh - 85px);
+        overflow-y: auto;
     }
 
     .nav-menu.active {
         left: 0;
+    }
+
+    .nav-link {
+        width: 100%;
     }
 }
