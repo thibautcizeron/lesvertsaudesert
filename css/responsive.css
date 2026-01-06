@@ -54,7 +54,7 @@
 
     /* Sections */
     .section {
-        padding: 80px 0;
+        padding: 30px 0 40px 0;
     }
 
     .section-title {
@@ -75,6 +75,10 @@
     }
 
     /* Équipe */
+    .equipe-section {
+        padding-bottom: 10px;
+    }
+
     .equipe-grid {
         gap: 40px;
     }
@@ -93,7 +97,7 @@
 
     /* Réduire le padding-top des sections sur mobile */
     .section {
-        padding: 96px 0 50px 0;
+        padding: 30px 0 40px 0;
     }
 
     /* Navigation */
@@ -185,11 +189,11 @@
 
     /* Sections */
     .section {
-        padding: 60px 0;
+        padding: 30px 0 40px 0;
     }
 
     .section-header {
-        margin-bottom: 40px;
+        margin-bottom: 30px;
     }
 
     .section-tag {
@@ -220,6 +224,10 @@
     }
 
     /* Équipe Section */
+    .equipe-section {
+        padding-bottom: 10px;
+    }
+
     .equipe-grid {
         grid-template-columns: 1fr;
         gap: 50px;
@@ -242,7 +250,7 @@
     /* Notre 4L - Model 3D */
     .model-hero {
         min-height: auto;
-        padding: 80px 0 60px;
+        padding: 0 0 40px 0;
     }
 
     .model-content {
@@ -275,7 +283,7 @@
     }
 
     .preparation-section {
-        padding: 60px 20px;
+        padding: 30px 20px;
     }
 
     .prep-title {
@@ -486,11 +494,11 @@
 
     /* Sections */
     .section {
-        padding: 50px 0;
+        padding: 30px 0 40px 0;
     }
 
     .section-header {
-        margin-bottom: 30px;
+        margin-bottom: 25px;
     }
 
     .section-title {
@@ -521,6 +529,10 @@
     }
 
     /* Équipe */
+    .equipe-section {
+        padding-bottom: 10px;
+    }
+
     .membre-photo {
         width: 150px;
         height: 150px;

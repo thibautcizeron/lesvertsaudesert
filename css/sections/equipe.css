@@ -1,6 +1,7 @@
 /* ===== EQUIPE SECTION ===== */
 .equipe-section {
     background: var(--dark-bg);
+    padding-bottom: 10px;
 }
 
 .equipe-grid {
