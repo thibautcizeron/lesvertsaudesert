@@ -64,10 +64,10 @@ const map = L.map('mapid', {
     attributionControl: true
 }).setView([INITIAL_LAT, INITIAL_LNG], INITIAL_ZOOM);
 
-// Style Outdoors (Aventure)
-L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    maxZoom: 20
+// Style OpenStreetMap (Gratuit, sans clé API)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?api_key=6183f712-30b8-4837-ab0b-dd50812fc697', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
 }).addTo(map);
 
 // Ajouter le contrôle de zoom personnalisé
