@@ -2,7 +2,7 @@
 
 // Fonction pour obtenir l'offset dynamique selon la taille d'écran
 function getScrollOffset() {
-    return window.innerWidth <= 768 ? 96 : 101;
+    return window.innerWidth <= 768 ? 50 : 60;
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
