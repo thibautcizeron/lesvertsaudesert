@@ -5,49 +5,49 @@ const destinations = [
         name: "Départ : Saint-Étienne",
         lat: 45.4397,
         lng: 4.3872,
-        date: "16.02.2027",
+        date: "16 février",
         pays: "France",
-        description: "Point de départ de notre aventure du 4L Trophy ! Départ de Saint-Étienne pour commencer notre périple vers le Maroc."
+        description: "Point de départ de notre aventure ! Départ de Saint-Étienne un jour avant le village départ officiel à Biarritz."
     },
     {
-        name: "Biarritz",
+        name: "Village Départ",
         lat: 43.4832,
         lng: -1.5586,
-        date: "17-20.02.2027",
-        pays: "France",
-        description: "Étape sur la côte basque française. Dernière ville française avant de traverser l'Espagne."
+        date: "17 & 18 février",
+        pays: "Biarritz",
+        description: "Point de départ officiel du 4L Trophy ! Départ de Biarritz pour commencer notre périple vers le Maroc."
     },
     {
-        name: "Algéciras",
+        name: "Premier bivouac",
         lat: 36.1382,
         lng: -5.4418,
-        date: "19-22.02.2027",
-        pays: "Espagne",
-        description: "Ville portuaire du sud de l'Espagne. Embarquement pour le ferry vers Tanger, traversée du détroit de Gibraltar."
+        date: "19 & 20 février",
+        pays: "Algeciras Espagne",
+        description: "Premier bivouac en Espagne avant la traversée vers l'Afrique. Nuit sous les étoiles avec tous les équipages."
     },
     {
-        name: "Tanger",
+        name: "Traversée en bateau",
         lat: 35.7595,
         lng: -5.8330,
-        date: "22-23.02.2027",
-        pays: "Maroc",
-        description: "Première ville marocaine ! Arrivée en Afrique après la traversée du détroit de Gibraltar."
+        date: "20 & 21 février",
+        pays: "Détroit de Gibraltar",
+        description: "Traversée du détroit de Gibraltar en ferry. Passage de l'Europe vers l'Afrique, arrivée à Tanger au Maroc."
     },
     {
-        name: "Merzouga",
+        name: "6 étapes sportives",
         lat: 31.0801,
         lng: -4.0061,
-        date: "24-28.02.2027 + 01.03.2027",
-        pays: "Maroc",
-        description: "Le désert du Sahara ! Dunes de l'Erg Chebbi, paysages magnifiques et journée libre le 01.03 pour profiter du désert."
+        date: "22 & 26 février",
+        pays: "Désert du Sahara",
+        description: "6 jours d'étapes sportives dans le désert marocain ! Navigation à la boussole, dunes de sable et pistes désertiques."
     },
     {
-        name: "Marrakech",
+        name: "Ligne d'arrivée",
         lat: 31.6295,
         lng: -7.9811,
-        date: "28.02.2027",
-        pays: "Maroc",
-        description: "Arrivée finale à Marrakech, la ville rouge ! Fin de l'aventure avant le retour vers la France le 02.03.2027."
+        date: "26 février",
+        pays: "Marrakech",
+        description: "Ligne d'arrivée à Marrakech ! Fin des étapes sportives, début des festivités."
     }
 ];
 
@@ -64,22 +64,11 @@ const map = L.map('mapid', {
     attributionControl: true
 }).setView([INITIAL_LAT, INITIAL_LNG], INITIAL_ZOOM);
 
-// Ajout d'un style de carte moderne
-const isDarkMode = false; // Changez à true pour mode sombre
-
-if (isDarkMode) {
-    // Mode sombre - CartoDB Dark Matter
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
-        maxZoom: 19
-    }).addTo(map);
-} else {
-    // Mode clair - CartoDB Voyager (style moderne et coloré)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
-        maxZoom: 19
-    }).addTo(map);
-}
+// Style Outdoors (Aventure)
+L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 20
+}).addTo(map);
 
 // Ajouter le contrôle de zoom personnalisé
 L.control.zoom({
@@ -344,3 +333,4 @@ resetBtn.addEventListener('click', () => {
     // Recentrer la carte
     map.setView([INITIAL_LAT, INITIAL_LNG], INITIAL_ZOOM);
 });
+
