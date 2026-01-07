@@ -32,6 +32,16 @@
 .card-icon {
     font-size: 3rem;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+}
+
+.card-logo {
+    max-width: 100px;
+    height: auto;
+    object-fit: contain;
 }
 
 .projet-card h3 {

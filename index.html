@@ -15,13 +15,13 @@
 <!-- Navigation -->
 <nav class="navbar">
     <div class="nav-container">
-        <div class="logo">
+        <a href="#accueil" class="logo">
             <img src="images/logo1.png" alt="Logo Les Verts au Désert" class="logo-image">
             <div class="logo-content">
                 <span class="logo-text">Les Verts au Désert</span>
                 <span class="logo-subtitle">4L Trophy 2027</span>
             </div>
-        </div>
+        </a>
         <ul class="nav-menu">
             <li><a href="#accueil" class="nav-link">Accueil</a></li>
             <li><a href="#projet" class="nav-link">Notre Projet</a></li>
@@ -29,6 +29,7 @@
             <li><a href="#equipe" class="nav-link">L'Équipe</a></li>
             <li><a href="#notre-4l" class="nav-link">Notre 4L</a></li>
             <li><a href="#budget" class="nav-link">Budget</a></li>
+            <li><a href="#sponsoring" class="nav-link">Sponsoring</a></li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
         <div class="hamburger">
@@ -78,17 +79,23 @@
         </div>
         <div class="projet-grid">
             <div class="projet-card">
-                <div class="card-icon">🗺️</div>
+                <div class="card-icon">
+                    <img src="images/logo_4Ltr.png" alt="4L Trophy" class="card-logo">
+                </div>
                 <h3>6000 km d'aventure</h3>
                 <p>Départ de Biarritz le 17 février pour arriver à Marrakech le 28 février. 10 jours de parcours avec 6 étapes dans le désert. Sans GPS, uniquement avec un roadbook, une boussole et une carte.</p>
             </div>
             <div class="projet-card">
-                <div class="card-icon">🎒</div>
+                <div class="card-icon">
+                    <img src="images/logo_edd.png" alt="Enfants du Désert" class="card-logo">
+                </div>
                 <h3>Action humanitaire</h3>
                 <p>Partenariat avec l'association "Les Enfants du Désert" pour l'éducation des enfants marocains. Transport de fournitures scolaires distribuées sur place. Plus de 200 000 enfants ont déjà bénéficié de ce programme.</p>
             </div>
             <div class="projet-card">
-                <div class="card-icon">🏔️</div>
+                <div class="card-icon">
+                    <img src="images/logo_forez.png" alt="Forez" class="card-logo">
+                </div>
                 <h3>Représenter le Forez</h3>
                 <p>Nous sommes deux amis stéphanois, très motivés et prêts à tout pour réussir ce projet de vie. Nous voulons représenter le Forez dans cette aventure d'ampleur internationale.</p>
             </div>
@@ -233,13 +240,13 @@
     </div>
 </section>
 
-<!-- Budget et Sponsoring -->
+<!-- Budget -->
     <section id="budget" class="section budget-section">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Budget</span>
                 <h2 class="section-title">Budget prévisionnel</h2>
-                <p style="max-width: 800px; margin: 1rem auto; color: #666;">Pour mener à bien ce projet, nous avons besoin de votre soutien. Voici le détail de notre budget pour l'édition 2023.</p>
+                <p style="max-width: 800px; margin: 1rem auto; color: #666;">Pour mener à bien ce projet, nous avons besoin de votre soutien. Voici le détail de notre budget pour l'édition 2027.</p>
             </div>
 
             <div class="budget-total">
@@ -278,6 +285,17 @@
                     <h4>Divers équipements</h4>
                     <p class="budget-value">500 €</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Sponsoring -->
+    <section id="sponsoring" class="section sponsoring-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Partenariat</span>
+                <h2 class="section-title">Devenez notre partenaire</h2>
+                <p style="max-width: 800px; margin: 1rem auto; color: #666;">Rejoignez l'aventure et soutenez notre projet humanitaire. Plusieurs formules de partenariat s'offrent à vous.</p>
             </div>
 
             <div class="sponsoring-info">
@@ -371,6 +389,20 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Bouton de téléchargement du dossier de sponsoring -->
+                <div class="download-section">
+                    <h3>Téléchargez notre dossier de sponsoring</h3>
+                    <p>Découvrez en détail notre projet et les différentes formules de partenariat.</p>
+                    <a href="doc/DOSSIER Sponsoring.pdf" download class="cta-button download-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Télécharger le dossier de sponsoring
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -423,9 +455,10 @@
                         <li><a href="#accueil">Accueil</a></li>
                         <li><a href="#projet">Notre Projet</a></li>
                         <li><a href="#itineraire">Itinéraire</a></li>
-                        <li><a href="#budget">Budget</a></li>
                         <li><a href="#equipe">L'Équipe</a></li>
                         <li><a href="#notre-4l">Notre 4L</a></li>
+                        <li><a href="#budget">Budget</a></li>
+                        <li><a href="#sponsoring">Sponsoring</a></li>
                     </ul>
                 </div>
 

@@ -1,0 +1,227 @@
+/* ===== SPONSORING SECTION ===== */
+.sponsoring-section {
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+}
+
+.sponsoring-info {
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    border: none;
+}
+
+.sponsoring-info h3 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+    background: linear-gradient(135deg, var(--vert-stephanois), var(--vert-clair));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sponsoring-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.sponsoring-card {
+    background: var(--dark-card);
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(0, 255, 136, 0.1);
+    transition: all 0.3s ease;
+}
+
+.sponsoring-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--vert-stephanois);
+    box-shadow: 0 10px 30px rgba(0, 166, 80, 0.2);
+}
+
+.sponsoring-card .card-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.sponsoring-card h4 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: var(--vert-clair);
+}
+
+.sponsoring-card p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+/* ===== TARIF SECTION ===== */
+.tarif-section {
+    margin-top: 80px;
+    padding: 60px 40px;
+    background: var(--dark-lighter);
+    border-radius: 30px;
+    border: 1px solid rgba(0, 255, 136, 0.1);
+}
+
+.tarif-section h3 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 5px;
+    background: linear-gradient(135deg, var(--vert-stephanois), var(--vert-clair));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tarif-intro {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.tarif-content {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+/* Schéma de la voiture - Image */
+.car-schema-image {
+    width: 100%;
+}
+
+.car-schema-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+/* Tableau des tarifs */
+.pricing-table {
+    width: 100%;
+}
+
+.pricing-table h4 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: var(--vert-clair);
+    text-align: center;
+}
+
+.pricing-table table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.pricing-table thead {
+    display: none;
+}
+
+.pricing-table tbody {
+    display: contents;
+}
+
+.pricing-table tbody tr {
+    background: var(--dark-card);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.pricing-table tbody tr:hover {
+    transform: translateY(-3px);
+    border-color: var(--vert-stephanois);
+    box-shadow: 0 8px 25px rgba(0, 166, 80, 0.2);
+}
+
+.pricing-table td {
+    padding: 0;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.pricing-table td:last-child {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--vert-clair);
+}
+
+.pricing-table .highlight {
+    background: linear-gradient(135deg, rgba(0, 166, 80, 0.2), rgba(0, 166, 80, 0.3));
+    border-color: var(--vert-stephanois);
+    grid-column: 1 / -1;
+}
+
+.pricing-table .highlight td {
+    color: var(--vert-clair);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.pricing-table .special {
+    background: linear-gradient(135deg, var(--vert-stephanois), var(--vert-fonce));
+    border-color: var(--vert-clair);
+    grid-column: 1 / -1;
+}
+
+.pricing-table .special td {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/* ===== DOWNLOAD SECTION ===== */
+.download-section {
+    margin-top: 80px;
+    padding: 60px 40px;
+    background: var(--dark-card);
+    border-radius: 30px;
+    text-align: center;
+    border: 2px solid var(--vert-stephanois);
+    box-shadow: 0 10px 40px rgba(0, 166, 80, 0.15);
+}
+
+.download-section h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, var(--vert-stephanois), var(--vert-clair));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.download-section p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,6 +1,6 @@
 /* ===== SECTION ITINÉRAIRE - CARTE INTERACTIVE ===== */
 .itineraire-section {
-    background: var(--dark-bg);
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--dark-card) 100%);
     min-height: 100vh;
     padding: 40px 0 40px 0;
 }

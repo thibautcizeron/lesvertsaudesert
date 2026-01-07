@@ -1,6 +1,6 @@
 /* ===== EQUIPE SECTION ===== */
 .equipe-section {
-    background: var(--dark-bg);
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--dark-card) 100%);
     padding-bottom: 80px;
 }
 
