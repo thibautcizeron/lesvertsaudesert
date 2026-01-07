@@ -5,7 +5,7 @@ const destinations = [
         name: "Départ : Saint-Étienne",
         lat: 45.4397,
         lng: 4.3872,
-        date: "16 février",
+        date: "16 février 2027",
         pays: "France",
         description: "Point de départ de notre aventure ! Départ de Saint-Étienne un jour avant le village départ officiel à Biarritz."
     },
@@ -13,7 +13,7 @@ const destinations = [
         name: "Village Départ",
         lat: 43.4832,
         lng: -1.5586,
-        date: "17 & 18 février",
+        date: "17 & 18 février 2027",
         pays: "Biarritz",
         description: "Point de départ officiel du 4L Trophy ! Départ de Biarritz pour commencer notre périple vers le Maroc."
     },
@@ -21,7 +21,7 @@ const destinations = [
         name: "Premier bivouac",
         lat: 36.1382,
         lng: -5.4418,
-        date: "19 & 20 février",
+        date: "19 & 20 février 2027",
         pays: "Algeciras Espagne",
         description: "Premier bivouac en Espagne avant la traversée vers l'Afrique. Nuit sous les étoiles avec tous les équipages."
     },
@@ -29,7 +29,7 @@ const destinations = [
         name: "Traversée en bateau",
         lat: 35.7595,
         lng: -5.8330,
-        date: "20 & 21 février",
+        date: "20 & 21 février 2027",
         pays: "Détroit de Gibraltar",
         description: "Traversée du détroit de Gibraltar en ferry. Passage de l'Europe vers l'Afrique, arrivée à Tanger au Maroc."
     },
@@ -37,7 +37,7 @@ const destinations = [
         name: "6 étapes sportives",
         lat: 31.0801,
         lng: -4.0061,
-        date: "22 & 26 février",
+        date: "22 & 26 février 2027",
         pays: "Désert du Sahara",
         description: "6 jours d'étapes sportives dans le désert marocain ! Navigation à la boussole, dunes de sable et pistes désertiques."
     },
@@ -45,7 +45,7 @@ const destinations = [
         name: "Ligne d'arrivée",
         lat: 31.6295,
         lng: -7.9811,
-        date: "26 février",
+        date: "26 février 2027",
         pays: "Marrakech",
         description: "Ligne d'arrivée à Marrakech ! Fin des étapes sportives, début des festivités."
     }
@@ -96,7 +96,7 @@ destinations.forEach((dest, index) => {
                 📍 ${dest.pays}
             </p>
             <p style="margin: 5px 0; font-style: italic; color: #666;">
-                📅 ${dest.date}
+                ${dest.date}
             </p>
             <p style="margin: 10px 0 0 0; font-size: 0.95em; line-height: 1.4; text-align: left;">
                 ${dest.description}
@@ -165,7 +165,7 @@ destinations.forEach((dest, index) => {
     item.innerHTML = `
         <h3>${dest.name}</h3>
         <p class="pays">📍 ${dest.pays}</p>
-        <p class="date">📅 ${dest.date}</p>
+        <p class="date">${dest.date}</p>
     `;
 
     // Ajouter un événement au clic pour centrer la carte et ouvrir le popup

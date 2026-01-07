@@ -189,13 +189,25 @@ if (canvasContainer) {
         renderer.setPixelRatio(window.devicePixelRatio); // Keep full quality on resize
     });
 
-    // Scroll-based rotation
+    // Scroll-based rotation (only when section is visible)
     let scrollRotation = 0;
+    let lastScrollRotation = 0;
+
     window.addEventListener('scroll', () => {
-        // Calculate rotation based on scroll position
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        // Rotate the car: 0.001 radians per pixel scrolled
-        scrollRotation = scrollTop * 0.001;
+        // Check if the canvas container is approaching or visible in viewport
+        const rect = canvasContainer.getBoundingClientRect();
+        // Start rotating when section is within 1 viewport height from bottom
+        const isInRange = rect.top < window.innerHeight * 2 && rect.bottom > 0;
+
+        if (isInRange) {
+            // Calculate scroll within extended range (includes previous section)
+            const sectionScrollTop = Math.max(0, window.innerHeight - rect.top);
+            // Rotate the car: 0.002 radians per pixel scrolled within the range
+            scrollRotation = lastScrollRotation + (sectionScrollTop * 0.002);
+        } else if (rect.bottom <= 0) {
+            // Section is above viewport - save the last rotation
+            lastScrollRotation = scrollRotation;
+        }
     });
 
     // Animation loop
