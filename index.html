@@ -3,8 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les Verts au Désert - 4L Trophy 2027</title>
+
+    <!-- SEO Meta Tags -->
+    <title>Les Verts au Désert - 4L Trophy 2027 | Équipe Stéphanoise</title>
+    <meta name="description" content="Les Verts au Désert, équipe stéphanoise du 4L Trophy 2027. 6000 km d'aventure humanitaire de Biarritz à Marrakech du 17 au 28 février 2027. Soutenez notre projet!">
+    <meta name="keywords" content="4L Trophy, 4L Trophy 2027, Les Verts au Désert, Saint-Étienne, raid humanitaire, Maroc, Renault 4L, sponsoring, équipe stéphanoise">
+    <meta name="author" content="Constantin Guillarme, Thibaut Cizeron">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.lesvertsaudesert.com">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/logo1.png">
+    <link rel="apple-touch-icon" href="images/logo1.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.lesvertsaudesert.com">
+    <meta property="og:title" content="Les Verts au Désert - 4L Trophy 2027">
+    <meta property="og:description" content="Équipe stéphanoise du 4L Trophy 2027. 6000 km d'aventure humanitaire de Biarritz à Marrakech. Soutenez notre projet!">
+    <meta property="og:image" content="https://www.lesvertsaudesert.com/images/logo1.png">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.lesvertsaudesert.com">
+    <meta name="twitter:title" content="Les Verts au Désert - 4L Trophy 2027">
+    <meta name="twitter:description" content="Équipe stéphanoise du 4L Trophy 2027. 6000 km d'aventure humanitaire de Biarritz à Marrakech.">
+    <meta name="twitter:image" content="https://www.lesvertsaudesert.com/images/logo1.png">
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="FR-ARA">
+    <meta name="geo.placename" content="Saint-Étienne">
+    <meta name="geo.position" content="45.434509;4.390198">
+    <meta name="ICBM" content="45.434509, 4.390198">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -518,5 +549,88 @@
 
     <!-- Script principal du site (modules ES6) -->
     <script src="js/main.js" type="module"></script>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Les Verts au Désert",
+        "url": "https://www.lesvertsaudesert.com",
+        "logo": "https://www.lesvertsaudesert.com/images/logo1.png",
+        "description": "Équipe stéphanoise du 4L Trophy 2027. Projet humanitaire de 6000 km de Biarritz à Marrakech.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Saint-Étienne",
+            "addressRegion": "Auvergne-Rhône-Alpes",
+            "addressCountry": "FR"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+33602235859",
+            "contactType": "Customer Service",
+            "email": "thibaut.cizeron2002@gmail.com"
+        },
+        "sameAs": [
+            "https://www.instagram.com/LesVertsAuDesert.42"
+        ],
+        "member": [
+            {
+                "@type": "Person",
+                "name": "Constantin Guillarme",
+                "jobTitle": "Pilote",
+                "worksFor": {
+                    "@type": "Organization",
+                    "name": "Les Verts au Désert"
+                }
+            },
+            {
+                "@type": "Person",
+                "name": "Thibaut Cizeron",
+                "jobTitle": "Co-pilote",
+                "worksFor": {
+                    "@type": "Organization",
+                    "name": "Les Verts au Désert"
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": "4L Trophy 2027 - Les Verts au Désert",
+        "description": "Participation de l'équipe stéphanoise Les Verts au Désert au 4L Trophy 2027, raid humanitaire de 6000 km",
+        "startDate": "2027-02-17",
+        "endDate": "2027-02-28",
+        "location": [
+            {
+                "@type": "Place",
+                "name": "Biarritz",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Biarritz",
+                    "addressCountry": "FR"
+                }
+            },
+            {
+                "@type": "Place",
+                "name": "Marrakech",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Marrakech",
+                    "addressCountry": "MA"
+                }
+            }
+        ],
+        "organizer": {
+            "@type": "Organization",
+            "name": "Les Verts au Désert",
+            "url": "https://www.lesvertsaudesert.com"
+        }
+    }
+    </script>
 </body>
 </html>

@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.lesvertsaudesert.com/sitemap.xml
+
+# Disallow specific files if needed
+Disallow: /js/
+Disallow: /css/
+
+# Allow images to be indexed
+User-agent: Googlebot-Image
+Allow: /images/
