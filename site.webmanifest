@@ -1,0 +1,26 @@
+{
+    "name": "Les Verts au Désert",
+    "short_name": "LVAD",
+    "description": "Équipe stéphanoise du 4L Trophy 2027",
+    "icons": [
+        {
+            "src": "/images/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/logo1.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#2d5016",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "start_url": "/"
+}
