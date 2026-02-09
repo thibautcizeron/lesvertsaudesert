@@ -79,3 +79,42 @@
     color: var(--text-secondary);
     line-height: 1.7;
 }
+
+/* ===== QUI SOMMES-NOUS ===== */
+.qui-sommes-nous {
+    max-width: 800px;
+    margin: 60px auto 0;
+    text-align: center;
+    padding: 40px;
+    background: var(--dark-card);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 166, 80, 0.15);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.qui-sommes-nous.animate-in {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.qsn-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--vert-stephanois), var(--vert-clair));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.qsn-text {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 1.05rem;
+    margin-bottom: 15px;
+}
+
+.qsn-text:last-child {
+    margin-bottom: 0;
+}
