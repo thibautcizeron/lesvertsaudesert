@@ -1,0 +1,72 @@
+/* ===== PARTENAIRES SECTION ===== */
+.partenaires-section {
+    background: var(--dark-bg);
+    position: relative;
+}
+
+.partenaires-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.partenaire-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    min-width: 200px;
+}
+
+.partenaire-card:hover {
+    transform: translateY(-5px);
+}
+
+.partenaire-logo {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 16px;
+    padding: 12px;
+    transition: transform 0.3s ease;
+}
+
+.partenaire-card:hover .partenaire-logo {
+    transform: scale(1.05);
+}
+
+.partenaire-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.partenaire-nom {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.partenaire-card:hover .partenaire-nom {
+    color: var(--vert-clair);
+}
+
+.partenaires-merci {
+    text-align: center;
+    margin-top: 35px;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+}
+

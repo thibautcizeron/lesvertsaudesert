@@ -475,6 +475,18 @@
         min-height: 400px;
     }
 
+    /* Partenaires Section */
+    .partenaires-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .partenaire-card {
+        width: 100%;
+        max-width: 300px;
+    }
+
     /* Contact Section */
     .contact-form-centered {
         max-width: 100%;
