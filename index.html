@@ -289,44 +289,111 @@
             <div class="section-header">
                 <span class="section-tag">Budget</span>
                 <h2 class="section-title">Budget prévisionnel</h2>
-                <p style="max-width: 800px; margin: 1rem auto; color: #666;">Pour mener à bien ce projet, nous avons besoin de votre soutien. Voici le détail de notre budget pour l'édition 2027.</p>
+                <p class="section-subtitle">Pour mener à bien ce projet, nous avons besoin de votre soutien. Voici le détail de notre budget pour l'édition 2027.</p>
             </div>
 
-            <div class="budget-total">
-                <h3>Budget total</h3>
-                <p class="budget-amount">12 640 €</p>
-            </div>
+            <div class="budget-overview">
+                <div class="budget-chart-wrapper">
+                    <div class="budget-chart">
+                        <div class="budget-chart-center">
+                            <span class="budget-chart-label">Budget total</span>
+                            <span class="budget-chart-amount">12 640 €</span>
+                        </div>
+                    </div>
+                    <div class="budget-legend">
+                        <div class="legend-item"><span class="legend-dot" style="--dot-color: #00a650"></span>Inscription</div>
+                        <div class="legend-item"><span class="legend-dot" style="--dot-color: #0ea5e9"></span>Achat 4L</div>
+                        <div class="legend-item"><span class="legend-dot" style="--dot-color: #84cc16"></span>Réparations</div>
+                        <div class="legend-item"><span class="legend-dot" style="--dot-color: #14b8a6"></span>Équipements oblig.</div>
+                        <div class="legend-item"><span class="legend-dot" style="--dot-color: #f59e0b"></span>Essence & péages</div>
+                        <div class="legend-item"><span class="legend-dot" style="--dot-color: #8b5cf6"></span>Divers</div>
+                    </div>
+                </div>
 
-            <div class="budget-grid">
-                <div class="budget-item">
-                    <div class="budget-icon">📝</div>
-                    <h4>Inscription</h4>
-                    <p class="budget-value">3 640 €</p>
-                </div>
-                <div class="budget-item">
-                    <div class="budget-icon">🚗</div>
-                    <h4>Achat de la 4L</h4>
-                    <p class="budget-value">3 000 €</p>
-                </div>
-                <div class="budget-item">
-                    <div class="budget-icon">🔧</div>
-                    <h4>Réparations</h4>
-                    <p class="budget-value">3 500 €</p>
-                </div>
-                <div class="budget-item">
-                    <div class="budget-icon">🛡️</div>
-                    <h4>Équipements obligatoires</h4>
-                    <p class="budget-value">500 €</p>
-                </div>
-                <div class="budget-item">
-                    <div class="budget-icon">⛽</div>
-                    <h4>Essence, péages, assurance</h4>
-                    <p class="budget-value">1 500 €</p>
-                </div>
-                <div class="budget-item">
-                    <div class="budget-icon">📦</div>
-                    <h4>Divers équipements</h4>
-                    <p class="budget-value">500 €</p>
+                <div class="budget-details">
+                    <div class="budget-card" style="--bar-color: #00a650; --bar-width: 28.8%">
+                        <div class="budget-card-header">
+                            <div class="budget-card-icon" style="--icon-color: #00a650">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 12h4"/><path d="M10 16h4"/></svg>
+                            </div>
+                            <div class="budget-card-info">
+                                <h4>Inscription</h4>
+                                <span class="budget-card-percent">28,8 % du budget</span>
+                            </div>
+                            <span class="budget-card-amount">3 640 €</span>
+                        </div>
+                        <div class="budget-bar"><div class="budget-bar-fill"></div></div>
+                    </div>
+
+                    <div class="budget-card" style="--bar-color: #0ea5e9; --bar-width: 23.7%">
+                        <div class="budget-card-header">
+                            <div class="budget-card-icon" style="--icon-color: #0ea5e9">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18 10l-2.7-3.6A2 2 0 0 0 13.7 5H6.3a2 2 0 0 0-1.6.9L2 9.5 1 10.8V16c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                            </div>
+                            <div class="budget-card-info">
+                                <h4>Achat de la 4L</h4>
+                                <span class="budget-card-percent">23,7 % du budget</span>
+                            </div>
+                            <span class="budget-card-amount">3 000 €</span>
+                        </div>
+                        <div class="budget-bar"><div class="budget-bar-fill"></div></div>
+                    </div>
+
+                    <div class="budget-card" style="--bar-color: #84cc16; --bar-width: 27.7%">
+                        <div class="budget-card-header">
+                            <div class="budget-card-icon" style="--icon-color: #84cc16">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                            </div>
+                            <div class="budget-card-info">
+                                <h4>Réparations</h4>
+                                <span class="budget-card-percent">27,7 % du budget</span>
+                            </div>
+                            <span class="budget-card-amount">3 500 €</span>
+                        </div>
+                        <div class="budget-bar"><div class="budget-bar-fill"></div></div>
+                    </div>
+
+                    <div class="budget-card" style="--bar-color: #14b8a6; --bar-width: 4%">
+                        <div class="budget-card-header">
+                            <div class="budget-card-icon" style="--icon-color: #14b8a6">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+                            </div>
+                            <div class="budget-card-info">
+                                <h4>Équipements obligatoires</h4>
+                                <span class="budget-card-percent">4,0 % du budget</span>
+                            </div>
+                            <span class="budget-card-amount">500 €</span>
+                        </div>
+                        <div class="budget-bar"><div class="budget-bar-fill"></div></div>
+                    </div>
+
+                    <div class="budget-card" style="--bar-color: #f59e0b; --bar-width: 11.9%">
+                        <div class="budget-card-header">
+                            <div class="budget-card-icon" style="--icon-color: #f59e0b">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="15" y1="22" y2="22"/><line x1="4" x2="14" y1="9" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/></svg>
+                            </div>
+                            <div class="budget-card-info">
+                                <h4>Essence, péages, assurance</h4>
+                                <span class="budget-card-percent">11,9 % du budget</span>
+                            </div>
+                            <span class="budget-card-amount">1 500 €</span>
+                        </div>
+                        <div class="budget-bar"><div class="budget-bar-fill"></div></div>
+                    </div>
+
+                    <div class="budget-card" style="--bar-color: #8b5cf6; --bar-width: 4%">
+                        <div class="budget-card-header">
+                            <div class="budget-card-icon" style="--icon-color: #8b5cf6">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                            </div>
+                            <div class="budget-card-info">
+                                <h4>Divers équipements</h4>
+                                <span class="budget-card-percent">4,0 % du budget</span>
+                            </div>
+                            <span class="budget-card-amount">500 €</span>
+                        </div>
+                        <div class="budget-bar"><div class="budget-bar-fill"></div></div>
+                    </div>
                 </div>
             </div>
         </div>

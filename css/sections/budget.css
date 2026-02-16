@@ -3,75 +3,269 @@
     background: linear-gradient(180deg, var(--dark-bg) 0%, var(--dark-card) 100%);
 }
 
-.budget-total {
-    text-align: center;
-    margin: 40px 0;
-    padding: 30px;
-    background: linear-gradient(135deg, var(--vert-stephanois), var(--vert-fonce));
-    border-radius: 20px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+.budget-section .section-subtitle {
+    max-width: 700px;
+    margin: 1rem auto;
+    color: var(--text-secondary);
+    line-height: 1.8;
 }
 
-.budget-total h3 {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: white;
+/* === Overview : Chart + Details === */
+.budget-overview {
+    display: flex;
+    align-items: flex-start;
+    gap: 70px;
+    margin-top: 50px;
 }
 
-.budget-amount {
-    font-family: var(--font-heading);
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: white;
-    margin: 0;
-}
-
-.budget-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+/* === Donut Chart === */
+.budget-chart-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 30px;
-    margin: 60px 0;
+    position: sticky;
+    top: 120px;
 }
 
-.budget-item {
+.budget-chart {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #00a650 0deg 103deg,
+        transparent 103deg 105deg,
+        #0ea5e9 105deg 188deg,
+        transparent 188deg 190deg,
+        #84cc16 190deg 288deg,
+        transparent 288deg 289.5deg,
+        #14b8a6 289.5deg 303deg,
+        transparent 303deg 304.5deg,
+        #f59e0b 304.5deg 345deg,
+        transparent 345deg 346.5deg,
+        #8b5cf6 346.5deg 360deg
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 60px rgba(0, 166, 80, 0.12);
+    transition: transform 0.4s ease;
+}
+
+.budget-chart::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: conic-gradient(
+        rgba(0, 166, 80, 0.3) 0deg 103deg,
+        transparent 103deg 105deg,
+        rgba(14, 165, 233, 0.3) 105deg 188deg,
+        transparent 188deg 190deg,
+        rgba(132, 204, 22, 0.3) 190deg 288deg,
+        transparent 288deg 289.5deg,
+        rgba(20, 184, 166, 0.3) 289.5deg 303deg,
+        transparent 303deg 304.5deg,
+        rgba(245, 158, 11, 0.3) 304.5deg 345deg,
+        transparent 345deg 346.5deg,
+        rgba(139, 92, 246, 0.3) 346.5deg 360deg
+    );
+    z-index: -1;
+    filter: blur(12px);
+}
+
+.budget-chart-center {
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: var(--dark-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
+}
+
+.budget-chart-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.budget-chart-amount {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 0%, #a0aec0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* === Legend === */
+.budget-legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 24px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--dot-color);
+    flex-shrink: 0;
+}
+
+/* === Budget Details Cards === */
+.budget-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.budget-card {
     background: var(--dark-card);
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    border: 1px solid rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 22px 26px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateX(30px);
+    position: relative;
+    overflow: hidden;
+}
+
+.budget-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--bar-color);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.budget-card:hover::before {
+    opacity: 1;
+}
+
+.budget-card.animate-in {
+    animation: slideInRight 0.5s ease forwards;
+}
+
+.budget-card:nth-child(2).animate-in { animation-delay: 0.08s; }
+.budget-card:nth-child(3).animate-in { animation-delay: 0.16s; }
+.budget-card:nth-child(4).animate-in { animation-delay: 0.24s; }
+.budget-card:nth-child(5).animate-in { animation-delay: 0.32s; }
+.budget-card:nth-child(6).animate-in { animation-delay: 0.40s; }
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.budget-card:hover {
+    border-color: color-mix(in srgb, var(--bar-color) 30%, transparent);
+    background: color-mix(in srgb, var(--bar-color) 4%, var(--dark-card));
+    transform: translateX(4px);
+}
+
+.budget-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+.budget-card-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--icon-color) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--icon-color) 15%, transparent);
+    border-radius: 12px;
+    flex-shrink: 0;
+    color: var(--icon-color);
     transition: all 0.3s ease;
 }
 
-.budget-item:hover {
-    transform: translateY(-5px);
-    border-color: var(--vert-stephanois);
-    box-shadow: 0 10px 30px rgba(0, 166, 80, 0.2);
+.budget-card:hover .budget-card-icon {
+    background: color-mix(in srgb, var(--icon-color) 18%, transparent);
+    transform: scale(1.05);
 }
 
-.budget-icon {
-    font-size: 3rem;
-    margin-bottom: 15px;
+.budget-card-info {
+    flex: 1;
+    min-width: 0;
 }
 
-.budget-item h4 {
+.budget-card-info h4 {
     font-family: var(--font-heading);
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    color: var(--vert-clair);
-}
-
-.budget-value {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 600;
     color: white;
-    margin: 10px 0;
+    margin: 0 0 2px 0;
 }
 
-.budget-percent {
+.budget-card-percent {
+    font-size: 0.78rem;
     color: var(--text-secondary);
-    font-size: 1.1rem;
+    font-family: var(--font-body);
+}
+
+.budget-card-amount {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--bar-color);
+    white-space: nowrap;
+    letter-spacing: -0.5px;
+}
+
+/* === Progress Bar === */
+.budget-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.budget-bar-fill {
+    height: 100%;
+    width: var(--bar-width);
+    background: linear-gradient(90deg, var(--bar-color), color-mix(in srgb, var(--bar-color) 60%, white));
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.budget-card.animate-in .budget-bar-fill {
+    transform: scaleX(1);
 }

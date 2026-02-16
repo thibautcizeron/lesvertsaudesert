@@ -13,7 +13,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('.projet-card, .membre-card, .partenaire-card, .qui-sommes-nous').forEach(el => {
+document.querySelectorAll('.projet-card, .membre-card, .partenaire-card, .qui-sommes-nous, .budget-card').forEach(el => {
     observer.observe(el);
 });
 
