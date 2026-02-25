@@ -16,6 +16,7 @@
     text-align: center;
     opacity: 0;
     transform: translateY(30px);
+    will-change: transform, opacity;
 }
 
 .membre-card.animate-in {
@@ -91,6 +92,7 @@
     border: 1px solid rgba(0, 166, 80, 0.15);
     opacity: 0;
     transform: translateY(30px);
+    will-change: transform, opacity;
 }
 
 .qui-sommes-nous.animate-in {

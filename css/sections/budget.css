@@ -144,11 +144,12 @@
     border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 16px;
     padding: 22px 26px;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
     transform: translateX(30px);
     position: relative;
     overflow: hidden;
+    will-change: transform, opacity;
 }
 
 .budget-card::before {

@@ -32,11 +32,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ===== SCROLL INDICATOR =====
 const scrollIndicator = document.querySelector('.scroll-indicator');
 if (scrollIndicator) {
+    let indicatorTicking = false;
     window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 200) {
-            scrollIndicator.style.opacity = '0';
-        } else {
-            scrollIndicator.style.opacity = '1';
+        if (!indicatorTicking) {
+            requestAnimationFrame(() => {
+                scrollIndicator.style.opacity = window.pageYOffset > 200 ? '0' : '1';
+                indicatorTicking = false;
+            });
+            indicatorTicking = true;
         }
-    });
+    }, { passive: true });
 }
