@@ -27,6 +27,7 @@
     <meta property="og:description" content="Équipe stéphanoise du 4L Trophy 2027. 6000 km d'aventure humanitaire de Biarritz à Marrakech. Soutenez notre projet!">
     <meta property="og:image" content="https://www.lesvertsaudesert.com/images/logo1.png">
     <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Les Verts au Désert">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -52,7 +53,8 @@
 </head>
 <body>
 <!-- Navigation -->
-<nav class="navbar">
+<header role="banner">
+<nav class="navbar" aria-label="Navigation principale">
     <div class="nav-container">
         <a href="#accueil" class="logo">
             <img src="images/logo1.png" alt="Logo Les Verts au Désert" class="logo-image">
@@ -79,7 +81,9 @@
         </div>
     </div>
 </nav>
+</header>
 
+<main id="contenu-principal">
 <!-- Hero Section -->
 <section id="accueil" class="hero">
     <div class="hero-bg"></div>
@@ -120,21 +124,21 @@
         <div class="projet-grid">
             <div class="projet-card">
                 <div class="card-icon">
-                    <img src="images/logo_4Ltr.png" alt="4L Trophy" class="card-logo">
+                    <img src="images/logo_4Ltr.png" alt="Logo officiel du 4L Trophy" class="card-logo" loading="lazy">
                 </div>
                 <h3>6000 km d'aventure</h3>
                 <p>Départ de Biarritz le 17 février pour arriver à Marrakech le 28 février. 10 jours de parcours avec 6 étapes dans le désert. Sans GPS, uniquement avec un roadbook, une boussole et une carte.</p>
             </div>
             <div class="projet-card">
                 <div class="card-icon">
-                    <img src="images/logo_edd.png" alt="Enfants du Désert" class="card-logo">
+                    <img src="images/logo_edd.png" alt="Logo association Les Enfants du Désert" class="card-logo" loading="lazy">
                 </div>
                 <h3>Action humanitaire</h3>
                 <p>Partenariat avec l'association "Les Enfants du Désert" pour l'éducation des enfants marocains. Transport de fournitures scolaires distribuées sur place. Plus de 200 000 enfants ont déjà bénéficié de ce programme.</p>
             </div>
             <div class="projet-card">
                 <div class="card-icon">
-                    <img src="images/logo_forez.png" alt="Forez" class="card-logo">
+                    <img src="images/logo_forez.png" alt="Logo Forez - région stéphanoise" class="card-logo" loading="lazy">
                 </div>
                 <h3>Représenter le Forez</h3>
                 <p>Nous sommes deux amis stéphanois, très motivés et prêts à tout pour réussir ce projet de vie. Nous voulons représenter le Forez dans cette aventure d'ampleur internationale.</p>
@@ -153,8 +157,8 @@
         </div>
 
         <div class="map-container">
-            <aside id="map-sidebar">
-                <h2>Étapes du voyage</h2>
+            <aside id="map-sidebar" aria-label="Liste des étapes du voyage">
+                <h3>Étapes du voyage</h3>
                 <div id="destination-list"></div>
             </aside>
             <div id="mapid"></div>
@@ -172,7 +176,7 @@
         <div class="equipe-grid">
             <div class="membre-card">
                 <div class="membre-photo">
-                    <img src="images/const.jpeg" alt="Constantin GUILLARME" class="membre-image">
+                    <img src="images/const.jpeg" alt="Constantin GUILLARME - Pilote de l'équipe Les Verts au Désert" class="membre-image" loading="lazy">
                 </div>
                 <h3 class="membre-nom">Constantin GUILLARME</h3>
                 <p class="membre-role">24 ans - Pilote</p>
@@ -180,7 +184,7 @@
             </div>
             <div class="membre-card">
                 <div class="membre-photo">
-                    <img src="images/thibaut.jpeg" alt="Thibaut CIZERON" class="membre-image">
+                    <img src="images/thibaut.jpeg" alt="Thibaut CIZERON - Co-pilote de l'équipe Les Verts au Désert" class="membre-image" loading="lazy">
                 </div>
                 <h3 class="membre-nom">Thibaut CIZERON</h3>
                 <p class="membre-role">23 ans - Co-pilote</p>
@@ -434,7 +438,7 @@
                     <div class="tarif-content">
                         <!-- Schéma de la 4L -->
                         <div class="car-schema-image">
-                            <img src="images/sticker1.png" alt="Schéma des emplacements publicitaires sur la 4L" />
+                            <img src="images/sticker1.png" alt="Schéma des emplacements publicitaires sur la Renault 4L de l'équipe Les Verts au Désert" loading="lazy" />
                         </div>
 
                         <!-- Tableau des tarifs -->
@@ -522,13 +526,13 @@
             <div class="partenaires-grid">
                 <a class="partenaire-card" href="#" target="_blank" rel="noopener">
                     <div class="partenaire-logo">
-                        <img src="images/sponsor/shine-group.jpg" alt="Shine Group">
+                        <img src="images/sponsor/shine-group.jpg" alt="Logo partenaire Shine Group" loading="lazy">
                     </div>
                     <h4 class="partenaire-nom">Shine Group</h4>
                 </a>
                 <a class="partenaire-card" href="#" target="_blank" rel="noopener">
                     <div class="partenaire-logo">
-                        <img src="images/sponsor/cpe-lyon.png" alt="CPE Lyon">
+                        <img src="images/sponsor/cpe-lyon.png" alt="Logo partenaire CPE Lyon" loading="lazy">
                     </div>
                     <h4 class="partenaire-nom">CPE Lyon</h4>
                 </a>
@@ -565,12 +569,14 @@
             </form>
         </div>
     </section>
+</main>
+
 <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="images/logo1.png" alt="Logo" class="footer-logo">
+                    <img src="images/logo1.png" alt="Logo Les Verts au Désert" class="footer-logo" loading="lazy">
                     <h3>Les Verts au Désert</h3>
                     <p>Association stéphanoise engagée dans le 4L Trophy 2027. Aventure humaine et solidaire au cœur du désert marocain.</p>
                     <div class="footer-social">
@@ -660,45 +666,81 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Organization",
+        "@type": "NGO",
         "name": "Les Verts au Désert",
         "url": "https://www.lesvertsaudesert.com",
-        "logo": "https://www.lesvertsaudesert.com/images/logo1.png",
-        "description": "Équipe stéphanoise du 4L Trophy 2027. Projet humanitaire de 6000 km de Biarritz à Marrakech.",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.lesvertsaudesert.com/images/logo1.png",
+            "contentUrl": "https://www.lesvertsaudesert.com/images/logo1.png"
+        },
+        "description": "Association stéphanoise participant au 4L Trophy 2027, raid humanitaire de 6000 km de Biarritz à Marrakech avec collecte de fournitures scolaires pour les enfants marocains.",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Saint-Étienne",
             "addressRegion": "Auvergne-Rhône-Alpes",
+            "postalCode": "42000",
             "addressCountry": "FR"
         },
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+33602235859",
-            "contactType": "Customer Service",
-            "email": "thibaut.cizeron2002@gmail.com"
+            "contactType": "customer support",
+            "email": "contact@lesvertsaudesert.com",
+            "availableLanguage": "French"
         },
         "sameAs": [
             "https://www.instagram.com/LesVertsAuDesert.42"
         ],
-        "member": [
+        "founder": [
             {
                 "@type": "Person",
                 "name": "Constantin Guillarme",
-                "jobTitle": "Pilote",
-                "worksFor": {
-                    "@type": "Organization",
-                    "name": "Les Verts au Désert"
-                }
+                "jobTitle": "Pilote"
             },
             {
                 "@type": "Person",
                 "name": "Thibaut Cizeron",
-                "jobTitle": "Co-pilote",
-                "worksFor": {
-                    "@type": "Organization",
-                    "name": "Les Verts au Désert"
-                }
+                "jobTitle": "Co-pilote"
             }
+        ],
+        "foundingLocation": {
+            "@type": "Place",
+            "name": "Saint-Étienne, France"
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Les Verts au Désert",
+        "url": "https://www.lesvertsaudesert.com/",
+        "description": "Site officiel de l'équipe Les Verts au Désert — 4L Trophy 2027",
+        "inLanguage": "fr-FR",
+        "publisher": {
+            "@type": "NGO",
+            "name": "Les Verts au Désert"
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Navigation du site Les Verts au Désert",
+        "itemListElement": [
+            {"@type": "SiteLinksSearchBox", "url": "https://www.lesvertsaudesert.com/"},
+            {"@type": "ListItem", "position": 1, "name": "Accueil", "url": "https://www.lesvertsaudesert.com/#accueil"},
+            {"@type": "ListItem", "position": 2, "name": "Notre Projet", "url": "https://www.lesvertsaudesert.com/#projet"},
+            {"@type": "ListItem", "position": 3, "name": "Itinéraire", "url": "https://www.lesvertsaudesert.com/#itineraire"},
+            {"@type": "ListItem", "position": 4, "name": "L'Équipe", "url": "https://www.lesvertsaudesert.com/#equipe"},
+            {"@type": "ListItem", "position": 5, "name": "Notre 4L", "url": "https://www.lesvertsaudesert.com/#notre-4l"},
+            {"@type": "ListItem", "position": 6, "name": "Budget", "url": "https://www.lesvertsaudesert.com/#budget"},
+            {"@type": "ListItem", "position": 7, "name": "Sponsoring", "url": "https://www.lesvertsaudesert.com/#sponsoring"},
+            {"@type": "ListItem", "position": 8, "name": "Contact", "url": "https://www.lesvertsaudesert.com/#contact"}
         ]
     }
     </script>
