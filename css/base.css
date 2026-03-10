@@ -28,6 +28,7 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 101px; /* Navbar + 1px pour cacher complètement la section précédente */
+    overflow-x: hidden;
 }
 
 body {
@@ -35,7 +36,6 @@ body {
     background: var(--dark-bg);
     color: var(--text-primary);
     line-height: 1.6;
-    overflow-x: hidden;
 }
 
 /* Offset pour toutes les sections avec un id (pour les ancres) */

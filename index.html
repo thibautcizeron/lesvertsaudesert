@@ -65,15 +65,40 @@
         </a>
         <ul class="nav-menu">
             <li><a href="#accueil" class="nav-link">Accueil</a></li>
-            <li><a href="#projet" class="nav-link">Notre Projet</a></li>
-            <li><a href="#itineraire" class="nav-link">Itinéraire</a></li>
-            <li><a href="#equipe" class="nav-link">L'Équipe</a></li>
-            <li><a href="#notre-4l" class="nav-link">Notre 4L</a></li>
-            <li><a href="#budget" class="nav-link">Budget</a></li>
-            <li><a href="#sponsoring" class="nav-link">Sponsoring</a></li>
-            <li><a href="#partenaires" class="nav-link">Partenaires</a></li>
+            <li class="nav-dropdown">
+                <button class="nav-link nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                    L'Aventure <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#projet" class="dropdown-link" role="menuitem">Notre Projet</a></li>
+                    <li><a href="#itineraire" class="dropdown-link" role="menuitem">Itinéraire</a></li>
+                </ul>
+            </li>
+            <li class="nav-dropdown">
+                <button class="nav-link nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                    L'Équipe <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#equipe" class="dropdown-link" role="menuitem">L'Équipage</a></li>
+                    <li><a href="#notre-4l" class="dropdown-link" role="menuitem">Notre 4L</a></li>
+                </ul>
+            </li>
+            <li class="nav-dropdown">
+                <button class="nav-link nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                    Nous soutenir<svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#budget" class="dropdown-link" role="menuitem">Budget</a></li>
+                    <li><a href="#sponsoring" class="dropdown-link" role="menuitem">Sponsoring</a></li>
+                    <li><a href="#partenaires" class="dropdown-link" role="menuitem">Partenaires</a></li>
+                </ul>
+            </li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li class="nav-don-mobile">
+                <a href="https://www.helloasso.com/associations/les-verts-au-desert" target="_blank" rel="noopener" class="nav-don-btn">Faire un don</a>
+            </li>
         </ul>
+        <a href="https://www.helloasso.com/associations/les-verts-au-desert" target="_blank" rel="noopener" class="nav-don-btn">Faire un don</a>
         <div class="hamburger">
             <span></span>
             <span></span>
@@ -524,17 +549,23 @@
             </div>
 
             <div class="partenaires-grid">
-                <a class="partenaire-card" href="#" target="_blank" rel="noopener">
+                <a class="partenaire-card" href="https://www.shine-group.fr/" target="_blank" rel="noopener">
                     <div class="partenaire-logo">
                         <img src="images/sponsor/shine-group.jpg" alt="Logo partenaire Shine Group" loading="lazy">
                     </div>
                     <h4 class="partenaire-nom">Shine Group</h4>
                 </a>
-                <a class="partenaire-card" href="#" target="_blank" rel="noopener">
+                <a class="partenaire-card" href="https://www.cpe.fr/" target="_blank" rel="noopener">
                     <div class="partenaire-logo">
                         <img src="images/sponsor/cpe-lyon.png" alt="Logo partenaire CPE Lyon" loading="lazy">
                     </div>
                     <h4 class="partenaire-nom">CPE Lyon</h4>
+                </a>
+                <a class="partenaire-card" href="https://www.euroculasse.com/" target="_blank" rel="noopener">
+                    <div class="partenaire-logo">
+                        <img src="images/sponsor/euroculasse.png" alt="Logo partenaire Euroclasse" loading="lazy">
+                    </div>
+                    <h4 class="partenaire-nom">Euroclasse</h4>
                 </a>
             </div>
 
