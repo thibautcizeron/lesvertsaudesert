@@ -19,8 +19,8 @@ const destinations = [
     },
     {
         name: "Premier bivouac",
-        lat: 36.1382,
-        lng: -5.4418,
+        lat: 36.1408,
+        lng: -5.4562,
         date: "19 & 20 février 2027",
         pays: "Algeciras Espagne",
         description: "Premier bivouac en Espagne avant la traversée vers l'Afrique. Nuit sous les étoiles avec tous les équipages."
@@ -51,103 +51,108 @@ const destinations = [
     }
 ];
 
+// Segments où un routage routier réel a du sens (OSRM).
+const ROUTABLE_SEGMENTS = new Set([0, 1, 3, 4]); // Saint-Étienne→Biarritz, Biarritz→Algeciras, Détroit→désert, désert→Marrakech (index du segment = index du point de départ)
+
+// Le segment absent de la liste ci-dessus (traversée en ferry) reste en ligne directe.
+
 // --- 2. INITIALISATION DE LA CARTE ---
 
-// Centrage initial de la vue
 const INITIAL_LAT = 38;
 const INITIAL_LNG = -1.5;
-const INITIAL_ZOOM = 5;
+const INITIAL_ZOOM = 4.3;
 
-// Création de l'objet carte, lié à l'ID 'mapid'
-const map = L.map('mapid', {
-    zoomControl: false, // On va ajouter un contrôle personnalisé
-    attributionControl: true
-}).setView([INITIAL_LAT, INITIAL_LNG], INITIAL_ZOOM);
-
-// Style OpenStreetMap (Gratuit, sans clé API)
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?api_key=6183f712-30b8-4837-ab0b-dd50812fc697', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    maxZoom: 19
-}).addTo(map);
-
-// Ajouter le contrôle de zoom personnalisé
-L.control.zoom({
-    position: 'topright'
-}).addTo(map);
-
-
-// --- 3. AJOUT DES MARQUEURS ET TRACÉ DU CHEMIN ---
-
-const routeCoordinates = []; // Pour stocker les points du tracé
-const markers = {}; // Pour stocker les références des marqueurs
-
-destinations.forEach((dest, index) => {
-
-    // 1. Stocker les coordonnées
-    routeCoordinates.push([dest.lat, dest.lng]);
-
-    // 2. Contenu de l'infobulle (popup) enrichi
-    const popupContent = `
-        <div style="text-align: center; min-width: 250px;">
-            <h3 style="margin: 0 0 10px 0; color: #CC0000; font-size: 1.2em;">
-                ${dest.name}
-            </h3>
-            <p style="margin: 5px 0; font-weight: bold; color: #333;">
-                📍 ${dest.pays}
-            </p>
-            <p style="margin: 5px 0; font-style: italic; color: #666;">
-                ${dest.date}
-            </p>
-            <p style="margin: 10px 0 0 0; font-size: 0.95em; line-height: 1.4; text-align: left;">
-                ${dest.description}
-            </p>
-        </div>
-    `;
-
-    // 3. Personnaliser l'icône selon le type d'étape
-    let markerIcon;
-    if (index === 0) {
-        // Icône verte pour le départ
-        markerIcon = new L.Icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41]
-        });
-    } else if (index === destinations.length - 1) {
-        // Icône rouge pour l'arrivée
-        markerIcon = new L.Icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41]
-        });
-    } else {
-        // Icône bleue pour les étapes intermédiaires
-        markerIcon = new L.Icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41]
-        });
-    }
-
-    // 4. Ajouter le marqueur à la carte avec l'icône personnalisée
-    const marker = L.marker([dest.lat, dest.lng], { icon: markerIcon })
-        .addTo(map)
-        .bindPopup(popupContent);
-
-    // 5. Stocker le marqueur pour pouvoir l'utiliser depuis le panneau latéral
-    markers[index] = marker;
+// Style vectoriel sombre, gratuit et sans clé API (OpenFreeMap)
+const map = new maplibregl.Map({
+    container: 'mapid',
+    style: 'https://tiles.openfreemap.org/styles/dark',
+    center: [INITIAL_LNG, INITIAL_LAT],
+    zoom: INITIAL_ZOOM,
+    pitch: 0,
+    antialias: true,
+    attributionControl: { compact: true }
 });
 
-// --- 4. CRÉATION DU PANNEAU LATÉRAL AVEC LA LISTE DES DESTINATIONS ---
+map.addControl(new maplibregl.NavigationControl({ showCompass: true }), 'top-right');
+map.addControl(new maplibregl.FullscreenControl(), 'top-right');
+
+// Recalcule la taille du canvas si le conteneur change (polices qui finissent
+// de charger, layout flex qui se stabilise après coup, etc.). Sans ça, une
+// projection calculée sur de mauvaises dimensions décale les marqueurs tant
+// qu'aucun zoom manuel ne force MapLibre à se recalculer.
+if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(() => map.resize()).observe(document.getElementById('mapid'));
+}
+
+// Couleurs de la charte graphique
+const COLOR_ROUTE = '#00a650';
+
+// --- 3bis. MARQUEURS + POPUPS PAR ÉTAPE ---
+
+function buildPopupHTML(dest) {
+    return `
+        <div class="map-popup">
+            <h3>${dest.name}</h3>
+            <p class="popup-pays">📍 ${dest.pays}</p>
+            <p class="popup-date">🗓️ ${dest.date}</p>
+            <p class="popup-desc">${dest.description}</p>
+        </div>
+    `;
+}
+
+// Les marqueurs sont créés à la demande : soit au clic dans la liste, soit
+// automatiquement au fur et à mesure que la voiture atteint chaque ville
+// pendant l'animation du tracé. Une fois posé, un marqueur reste affiché
+// (trace cumulative des étapes déjà parcourues).
+const stepMarkers = new Array(destinations.length).fill(null);
+
+function getOrCreateMarker(index) {
+    let marker = stepMarkers[index];
+    if (marker) return marker;
+
+    const dest = destinations[index];
+    const markerEl = document.createElement('div');
+    markerEl.className = 'maplibre-marker';
+
+    if (index === 0) {
+        markerEl.classList.add('marker-start');
+    } else if (index === destinations.length - 1) {
+        markerEl.classList.add('marker-end');
+    } else {
+        markerEl.classList.add('marker-step');
+    }
+
+    markerEl.innerHTML = `
+        <div class="marker-pulse"></div>
+        <div class="marker-pin"></div>
+    `;
+
+    const popup = new maplibregl.Popup({ offset: 20 }).setHTML(buildPopupHTML(dest));
+
+    marker = new maplibregl.Marker({ element: markerEl, anchor: 'center' })
+        .setLngLat([dest.lng, dest.lat])
+        .setPopup(popup)
+        .addTo(map);
+
+    stepMarkers[index] = marker;
+    return marker;
+}
+
+// Clic manuel dans la liste : affiche le point de cette ville et ouvre son popup.
+function showMarkerForDestination(index) {
+    const marker = getOrCreateMarker(index);
+    const popup = marker.getPopup();
+    if (popup && !popup.isOpen()) {
+        marker.togglePopup();
+    }
+}
+
+// Passage automatique de la voiture pendant l'animation : pose juste le point, sans popup.
+function revealMarkerForDestination(index) {
+    getOrCreateMarker(index);
+}
+
+// --- 4. PANNEAU LATÉRAL AVEC LA LISTE DES DESTINATIONS ---
 
 const destinationList = document.getElementById('destination-list');
 
@@ -155,7 +160,6 @@ destinations.forEach((dest, index) => {
     const item = document.createElement('div');
     item.className = 'destination-item';
 
-    // Ajouter une classe spéciale pour le départ et l'arrivée
     if (index === 0) {
         item.classList.add('start');
     } else if (index === destinations.length - 1) {
@@ -168,169 +172,236 @@ destinations.forEach((dest, index) => {
         <p class="date">${dest.date}</p>
     `;
 
-    // Ajouter un événement au clic pour centrer la carte et ouvrir le popup
     item.addEventListener('click', () => {
-        map.setView([dest.lat, dest.lng], 8);
-        markers[index].openPopup();
+        map.flyTo({ center: [dest.lng, dest.lat], zoom: 7, pitch: 0, essential: true });
+        showMarkerForDestination(index);
     });
 
     destinationList.appendChild(item);
 });
 
-// --- 5. TRACER LA POLYLIGNE (LE CHEMIN) AVEC ANIMATION POINT PAR POINT ---
+// --- 5. CALCUL DE L'ITINÉRAIRE RÉEL (OSRM) ---
 
-// Créer la polyligne animée qui se dessine progressivement de ville en ville
-const polylineAnimated = L.polyline([], {
-    color: '#CC0000',
-    weight: 5,
-    opacity: 0.8,
-    lineJoin: 'round',
-    lineCap: 'round'
-}).addTo(map);
+const OSRM_BASE_URL = 'https://router.project-osrm.org/route/v1/driving/';
 
-// Variables pour l'animation point par point
-let currentSegmentIndex = 0;
-let segmentProgress = 0;
-const animationSpeed = 0.008; // Vitesse de progression (plus petit = plus lent)
+async function fetchRoadSegment(start, end) {
+    const url = `${OSRM_BASE_URL}${start[0]},${start[1]};${end[0]},${end[1]}?overview=full&geometries=geojson`;
 
-function animatePathPointByPoint() {
-    if (isAnimationPaused) {
-        requestAnimationFrame(animatePathPointByPoint);
-        return;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`OSRM HTTP ${response.status}`);
+
+        const data = await response.json();
+        if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+            return data.routes[0].geometry.coordinates;
+        }
+        throw new Error('OSRM: aucun itinéraire trouvé');
+    } catch (err) {
+        console.warn('Routage OSRM indisponible pour ce segment, ligne directe utilisée à la place.', err);
+        return [start, end];
     }
+}
 
-    if (currentSegmentIndex < routeCoordinates.length - 1) {
-        const start = routeCoordinates[currentSegmentIndex];
-        const end = routeCoordinates[currentSegmentIndex + 1];
+async function buildFullRoute() {
+    const segments = [];
+    const destinationIndices = [0]; // index dans `segments` de chaque destination, dans l'ordre
 
-        // Calculer la position actuelle entre start et end
-        const lat = start[0] + (end[0] - start[0]) * segmentProgress;
-        const lng = start[1] + (end[1] - start[1]) * segmentProgress;
+    for (let i = 0; i < destinations.length - 1; i++) {
+        const start = [destinations[i].lng, destinations[i].lat];
+        const end = [destinations[i + 1].lng, destinations[i + 1].lat];
 
-        // Ajouter le nouveau point à la ligne
-        const currentCoords = routeCoordinates.slice(0, currentSegmentIndex + 1);
-        currentCoords.push([lat, lng]);
-        polylineAnimated.setLatLngs(currentCoords);
-
-        // Progresser
-        segmentProgress += animationSpeed;
-
-        // Passer au segment suivant si on a fini celui-ci
-        if (segmentProgress >= 1) {
-            currentSegmentIndex++;
-            segmentProgress = 0;
-
-            // Animer le marqueur de la ville atteinte
-            if (currentSegmentIndex < routeCoordinates.length) {
-                setTimeout(() => {
-                    markers[currentSegmentIndex].openPopup();
-                    setTimeout(() => {
-                        markers[currentSegmentIndex].closePopup();
-                    }, 2000);
-                }, 100);
-            }
+        let segmentCoords;
+        if (ROUTABLE_SEGMENTS.has(i)) {
+            segmentCoords = await fetchRoadSegment(start, end);
+        } else {
+            // Traversée en ferry : ligne directe
+            segmentCoords = [start, end];
         }
 
+        // Éviter de dupliquer le point de jonction entre segments
+        if (segments.length > 0) {
+            segments.push(...segmentCoords.slice(1));
+        } else {
+            segments.push(...segmentCoords);
+        }
+
+        destinationIndices.push(segments.length - 1);
+    }
+
+    return { coords: segments, destinationIndices };
+}
+
+// --- 6. TRACÉ DU CHEMIN (ANIMÉ) ---
+
+const ROUTE_SOURCE_ID = 'route-progress';
+const ROUTE_LAYER_ID = 'route-progress-line';
+const ROUTE_GLOW_LAYER_ID = 'route-progress-glow';
+
+let routeCoordinates = destinations.map(d => [d.lng, d.lat]); // fallback avant chargement OSRM
+let cumulativeDistances = [0]; // distance cumulée jusqu'à chaque point de routeCoordinates
+let destinationIndices = destinations.map((_, i) => i); // index dans routeCoordinates de chaque ville, mis à jour une fois OSRM chargé
+let nextDestinationToReveal = 1; // destination[0] est révélée dès le départ de l'animation
+let currentPointIndex = 0;
+const ANIMATION_DURATION_MS = 10000; // durée totale du parcours animé, indépendante du nombre de points
+let animationStartTime = null;
+let animationsStarted = false;
+let mapLoaded = false;
+let routeReady = false;
+
+// Construit la table des distances cumulées le long du tracé, pour pouvoir
+// avancer à vitesse constante (par distance) plutôt que par index de point.
+// Sans ça, les segments plus densément échantillonnés (courbes du désert)
+// seraient parcourus beaucoup plus lentement que les segments à peu de points.
+function computeCumulativeDistances(coords) {
+    const distances = [0];
+    for (let i = 1; i < coords.length; i++) {
+        const [lng1, lat1] = coords[i - 1];
+        const [lng2, lat2] = coords[i];
+        const d = Math.sqrt((lng2 - lng1) ** 2 + (lat2 - lat1) ** 2);
+        distances.push(distances[i - 1] + d);
+    }
+    return distances;
+}
+
+// Trouve l'index du point atteint pour une distance parcourue donnée
+// (recherche linéaire à partir du dernier index connu, suffisant ici).
+function indexForDistance(targetDistance, fromIndex) {
+    let index = fromIndex;
+    while (index < cumulativeDistances.length - 1 && cumulativeDistances[index + 1] <= targetDistance) {
+        index++;
+    }
+    return index;
+}
+
+function emptyLineFeature(coords) {
+    return {
+        type: 'Feature',
+        geometry: { type: 'LineString', coordinates: coords },
+        properties: {}
+    };
+}
+
+function setupLayers() {
+    map.addSource(ROUTE_SOURCE_ID, {
+        type: 'geojson',
+        data: emptyLineFeature([])
+    });
+
+    map.addLayer({
+        id: ROUTE_GLOW_LAYER_ID,
+        type: 'line',
+        source: ROUTE_SOURCE_ID,
+        layout: { 'line-join': 'round', 'line-cap': 'round' },
+        paint: {
+            'line-color': COLOR_ROUTE,
+            'line-width': 12,
+            'line-blur': 6,
+            'line-opacity': 0.35
+        }
+    });
+
+    map.addLayer({
+        id: ROUTE_LAYER_ID,
+        type: 'line',
+        source: ROUTE_SOURCE_ID,
+        layout: { 'line-join': 'round', 'line-cap': 'round' },
+        paint: {
+            'line-color': COLOR_ROUTE,
+            'line-width': 4,
+            'line-opacity': 0.9
+        }
+    });
+
+    mapLoaded = true;
+    tryStartAnimation();
+}
+
+function tryStartAnimation() {
+    if (!mapLoaded || !routeReady || animationsStarted) return;
+    animationsStarted = true;
+
+    // Révèle le point de départ dès le début de l'animation
+    revealMarkerForDestination(0);
+
+    // Le conteneur peut ne pas avoir sa taille finale au moment du chargement
+    // (polices/layout pas encore stabilisés) : MapLibre calcule alors la
+    // projection avec un canvas de mauvaises dimensions, ce qui décale les
+    // marqueurs tant qu'aucune interaction (zoom) ne force un recalcul.
+    map.resize();
+
+    // Ajuster la vue pour englober tout le tracé réel
+    const bounds = routeCoordinates.reduce(
+        (b, coord) => b.extend(coord),
+        new maplibregl.LngLatBounds(routeCoordinates[0], routeCoordinates[0])
+    );
+    map.fitBounds(bounds, { padding: 60, pitch: 0, duration: 0 });
+
+    setTimeout(() => {
+        requestAnimationFrame(animatePathPointByPoint);
+    }, 1000);
+}
+
+function animatePathPointByPoint(timestamp) {
+    if (animationStartTime === null) animationStartTime = timestamp;
+
+    const elapsed = timestamp - animationStartTime;
+    const progress = Math.min(elapsed / ANIMATION_DURATION_MS, 1);
+    const totalDistance = cumulativeDistances[cumulativeDistances.length - 1];
+    const targetDistance = progress * totalDistance;
+    const targetIndex = indexForDistance(targetDistance, currentPointIndex);
+
+    if (targetIndex > currentPointIndex || progress >= 1) {
+        currentPointIndex = targetIndex;
+
+        const currentCoords = routeCoordinates.slice(0, currentPointIndex + 1);
+
+        const routeSource = map.getSource(ROUTE_SOURCE_ID);
+        if (routeSource) routeSource.setData(emptyLineFeature(currentCoords));
+
+        updateCarPosition(currentCoords);
+
+        // Révèle chaque ville dont le jalon vient d'être atteint par la voiture
+        while (
+            nextDestinationToReveal < destinationIndices.length &&
+            currentPointIndex >= destinationIndices[nextDestinationToReveal]
+        ) {
+            revealMarkerForDestination(nextDestinationToReveal);
+            nextDestinationToReveal++;
+        }
+    }
+
+    if (progress < 1) {
         requestAnimationFrame(animatePathPointByPoint);
     } else {
-        // Animation terminée - on est arrivé à Marrakech
-        polylineAnimated.setLatLngs(routeCoordinates);
         console.log("Arrivée à Marrakech !");
     }
 }
 
-// Démarrer l'animation après un court délai
-setTimeout(() => {
-    animatePathPointByPoint();
-}, 1000);
+map.on('load', setupLayers);
 
-// --- 6. AJUSTER LE ZOOM POUR QUE TOUTE LA ROUTE SOIT VISIBLE ---
-// Créer des limites basées sur les coordonnées
-const bounds = L.latLngBounds(routeCoordinates);
-map.fitBounds(bounds, {
-    padding: [50, 50]
+buildFullRoute().then(({ coords, destinationIndices: indices }) => {
+    routeCoordinates = coords;
+    cumulativeDistances = computeCumulativeDistances(coords);
+    destinationIndices = indices;
+    routeReady = true;
+    tryStartAnimation();
 });
 
-// --- 7. AJOUTER UN INDICATEUR DE VOYAGE (VOITURE ANIMÉE) ---
-const carIcon = L.icon({
-    iconUrl: 'images/4L.png',
-    iconSize: [50, 40],
-    iconAnchor: [20, 20]
-});
+// --- 7. ICÔNE DE LA 4L COMME INDICATEUR DIRECTEUR SUR LA CARTE ---
+// Marqueur DOM MapLibre standard, toujours affiché à l'horizontale (pas de
+// rotation selon le cap), positionné le long du tracé routé réel.
 
-const carMarker = L.marker(routeCoordinates[0], {
-    icon: carIcon,
-    zIndexOffset: 1000
-}).addTo(map);
+const carEl = document.createElement('div');
+carEl.className = 'car-marker-icon';
+carEl.innerHTML = '<img src="images/4L.png" alt="" />';
 
-// Animer la voiture le long du trajet (s'arrête à Marrakech)
-function animateCar() {
-    if (isAnimationPaused) {
-        requestAnimationFrame(animateCar);
-        return;
-    }
+const carMarker = new maplibregl.Marker({ element: carEl })
+    .setLngLat(routeCoordinates[0])
+    .addTo(map);
 
-    if (currentSegmentIndex < routeCoordinates.length - 1) {
-        const start = routeCoordinates[currentSegmentIndex];
-        const end = routeCoordinates[currentSegmentIndex + 1];
+function updateCarPosition(coordsUpToNow) {
+    if (coordsUpToNow.length === 0) return;
 
-        const lat = start[0] + (end[0] - start[0]) * segmentProgress;
-        const lng = start[1] + (end[1] - start[1]) * segmentProgress;
-
-        carMarker.setLatLng([lat, lng]);
-        requestAnimationFrame(animateCar);
-    } else if (currentSegmentIndex === routeCoordinates.length - 1) {
-        // Arrivé à Marrakech - positionner la voiture au dernier point
-        carMarker.setLatLng(routeCoordinates[routeCoordinates.length - 1]);
-        console.log("La voiture est arrivée à Marrakech !");
-    }
+    const lastPoint = coordsUpToNow[coordsUpToNow.length - 1];
+    carMarker.setLngLat(lastPoint);
 }
-
-setTimeout(animateCar, 1000);
-
-// --- 8. CONTRÔLES INTERACTIFS POUR L'ANIMATION ---
-
-let isAnimationPaused = false;
-
-// Bouton pause/lecture
-const toggleBtn = document.getElementById('toggle-animation');
-const animationIcon = document.getElementById('animation-icon');
-
-toggleBtn.addEventListener('click', () => {
-    isAnimationPaused = !isAnimationPaused;
-
-    if (isAnimationPaused) {
-        animationIcon.textContent = '▶️';
-        toggleBtn.innerHTML = '<span id="animation-icon">▶️</span> Reprendre';
-    } else {
-        animationIcon.textContent = '⏸️';
-        toggleBtn.innerHTML = '<span id="animation-icon">⏸️</span> Pause Animation';
-        // Relancer l'animation
-        animatePathPointByPoint();
-        animateCar();
-    }
-});
-
-// Bouton reset
-const resetBtn = document.getElementById('reset-animation');
-resetBtn.addEventListener('click', () => {
-    // Réinitialiser les variables
-    currentSegmentIndex = 0;
-    segmentProgress = 0;
-    polylineAnimated.setLatLngs([]);
-    carMarker.setLatLng(routeCoordinates[0]);
-
-    // Redémarrer les animations
-    isAnimationPaused = false;
-    animationIcon.textContent = '⏸️';
-    toggleBtn.innerHTML = '<span id="animation-icon">⏸️</span> Pause Animation';
-
-    setTimeout(() => {
-        animatePathPointByPoint();
-        animateCar();
-    }, 100);
-
-    // Recentrer la carte
-    map.setView([INITIAL_LAT, INITIAL_LNG], INITIAL_ZOOM);
-});
-
