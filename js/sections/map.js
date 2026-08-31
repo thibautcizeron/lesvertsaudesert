@@ -106,6 +106,10 @@ function buildPopupHTML(dest) {
 // (trace cumulative des étapes déjà parcourues).
 const stepMarkers = new Array(destinations.length).fill(null);
 
+// Une seule popup ouverte à la fois : on ferme la précédente dès qu'une
+// nouvelle s'ouvre (MapLibre ne le fait pas automatiquement, contrairement à Leaflet).
+let openPopup = null;
+
 function getOrCreateMarker(index) {
     let marker = stepMarkers[index];
     if (marker) return marker;
@@ -128,6 +132,19 @@ function getOrCreateMarker(index) {
     `;
 
     const popup = new maplibregl.Popup({ offset: 20 }).setHTML(buildPopupHTML(dest));
+
+    popup.on('open', () => {
+        if (openPopup && openPopup !== popup) {
+            openPopup.remove();
+        }
+        openPopup = popup;
+    });
+
+    popup.on('close', () => {
+        if (openPopup === popup) {
+            openPopup = null;
+        }
+    });
 
     marker = new maplibregl.Marker({ element: markerEl, anchor: 'center' })
         .setLngLat([dest.lng, dest.lat])

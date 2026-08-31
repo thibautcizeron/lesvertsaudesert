@@ -116,6 +116,11 @@ if (canvasContainer) {
                     child.receiveShadow = true;
 
                     if (child.material) {
+                        // Recolore la carrosserie en vert "Pop Green" (Renault 5 E-Tech)
+                        if (child.material.name === 'Carros') {
+                            child.material.color.set(0x31873c);
+                        }
+
                         const maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
 
                         // Enhance all texture maps
