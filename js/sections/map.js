@@ -190,8 +190,23 @@ destinations.forEach((dest, index) => {
     `;
 
     item.addEventListener('click', () => {
+        // Le clic peut déplacer le focus vers le canvas/la popup MapLibre, ce qui
+        // pousse le navigateur à recadrer la page (parfois jusqu'en haut) : on
+        // fige donc la position de scroll actuelle et on la restaure juste après.
+        const scrollY = window.scrollY;
+
         map.flyTo({ center: [dest.lng, dest.lat], zoom: 7, pitch: 0, essential: true });
         showMarkerForDestination(index);
+
+        const restoreScroll = () => {
+            if (window.scrollY !== scrollY) {
+                window.scrollTo({ top: scrollY, behavior: 'instant' });
+            }
+        };
+        requestAnimationFrame(restoreScroll);
+        // Filet de sécurité : la popup MapLibre s'ouvre après un micro-délai
+        // (création DOM + positionnement), donc un rAF seul peut la manquer.
+        setTimeout(restoreScroll, 50);
     });
 
     destinationList.appendChild(item);
@@ -290,6 +305,31 @@ function indexForDistance(targetDistance, fromIndex) {
     return index;
 }
 
+// Construit le tracé jusqu'à `targetDistance`, avec un point interpolé en bout
+// de segment pour une avancée continue. Sans interpolation, la position saute
+// d'un point échantillonné au suivant : sur les segments peu échantillonnés
+// (lignes droites en fin de trajet), ces sauts sont grands et la voiture donne
+// l'impression de "rattraper" ou dépasser le tracé au lieu d'avancer à vitesse
+// constante avec lui.
+function coordsForDistance(targetDistance) {
+    currentPointIndex = indexForDistance(targetDistance, currentPointIndex);
+    const coords = routeCoordinates.slice(0, currentPointIndex + 1);
+
+    const isLastPoint = currentPointIndex >= routeCoordinates.length - 1;
+    if (!isLastPoint) {
+        const segStart = cumulativeDistances[currentPointIndex];
+        const segEnd = cumulativeDistances[currentPointIndex + 1];
+        const segLength = segEnd - segStart;
+        const t = segLength > 0 ? (targetDistance - segStart) / segLength : 0;
+
+        const [lng1, lat1] = routeCoordinates[currentPointIndex];
+        const [lng2, lat2] = routeCoordinates[currentPointIndex + 1];
+        coords.push([lng1 + (lng2 - lng1) * t, lat1 + (lat2 - lat1) * t]);
+    }
+
+    return coords;
+}
+
 function emptyLineFeature(coords) {
     return {
         type: 'Feature',
@@ -365,26 +405,24 @@ function animatePathPointByPoint(timestamp) {
     const progress = Math.min(elapsed / ANIMATION_DURATION_MS, 1);
     const totalDistance = cumulativeDistances[cumulativeDistances.length - 1];
     const targetDistance = progress * totalDistance;
-    const targetIndex = indexForDistance(targetDistance, currentPointIndex);
 
-    if (targetIndex > currentPointIndex || progress >= 1) {
-        currentPointIndex = targetIndex;
+    // Recalcule le tracé + la position de la voiture à chaque frame, avec un
+    // point interpolé en bout de tracé pour une avancée continue (et non par
+    // sauts d'un point échantillonné au suivant).
+    const currentCoords = coordsForDistance(targetDistance);
 
-        const currentCoords = routeCoordinates.slice(0, currentPointIndex + 1);
+    const routeSource = map.getSource(ROUTE_SOURCE_ID);
+    if (routeSource) routeSource.setData(emptyLineFeature(currentCoords));
 
-        const routeSource = map.getSource(ROUTE_SOURCE_ID);
-        if (routeSource) routeSource.setData(emptyLineFeature(currentCoords));
+    updateCarPosition(currentCoords);
 
-        updateCarPosition(currentCoords);
-
-        // Révèle chaque ville dont le jalon vient d'être atteint par la voiture
-        while (
-            nextDestinationToReveal < destinationIndices.length &&
-            currentPointIndex >= destinationIndices[nextDestinationToReveal]
-        ) {
-            revealMarkerForDestination(nextDestinationToReveal);
-            nextDestinationToReveal++;
-        }
+    // Révèle chaque ville dont le jalon vient d'être atteint par la voiture
+    while (
+        nextDestinationToReveal < destinationIndices.length &&
+        currentPointIndex >= destinationIndices[nextDestinationToReveal]
+    ) {
+        revealMarkerForDestination(nextDestinationToReveal);
+        nextDestinationToReveal++;
     }
 
     if (progress < 1) {
